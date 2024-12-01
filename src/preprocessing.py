@@ -1,28 +1,52 @@
+# src/preprocessing.py
+
+import os
 import pandas as pd
-import numpy as np
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from imblearn.over_sampling import SMOTE
+from sklearn import preprocessing
+import joblib
 
-def preprocess_data(X_df):
-    # One-hot encode categorical variables
-    encoder = OneHotEncoder(handle_unknown='ignore')
-    X_encoded = encoder.fit_transform(X_df.select_dtypes(include=['object']))
-    X_encoded_df = pd.DataFrame.sparse.from_spmatrix(X_encoded, columns=encoder.get_feature_names_out(X_df.select_dtypes(include=['object']).columns))
+def load_and_preprocess_data(file_path):
+    """
+    Load and preprocess the heart failure dataset.
+    
+    Args:
+    file_path (str): Path to the CSV file containing the dataset.
+    
+    Returns:
+    tuple: Preprocessed features (X) and target variable (y).
+    """
+    # Load data
+    data = pd.read_csv(file_path)
+    
+    # Split features and target
+    X = data.drop(["DEATH_EVENT"], axis=1)
+    y = data["DEATH_EVENT"]
+    
+    # Scale features
+    scaler = preprocessing.StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+    X_df = pd.DataFrame(X_scaled, columns=X.columns)
+    
+    # Save the scaler
+    if not os.path.exists('../models'):
+        os.makedirs('../models')
+    joblib.dump(scaler, '../models/scaler.pkl')
+    
+    return X_df, y
 
-    # Standardize numerical features
-    scaler = StandardScaler()
-    X_numerical = scaler.fit_transform(X_df.select_dtypes(include=['number']))
-    X_numerical_df = pd.DataFrame(X_numerical, columns=X_df.select_dtypes(include=['number']).columns)
+def load_scaler():
+    """
+    Load the saved StandardScaler object.
+    
+    Returns:
+    sklearn.preprocessing.StandardScaler: Loaded scaler object.
+    """
+    return joblib.load('../models/scaler.pkl')
 
-    # Combine processed data
-    X_processed = pd.concat([X_numerical_df, X_encoded_df], axis=1)
-
-    # Impute missing values (if any)
-    X_processed = X_processed.fillna(X_processed.mean())
-
-    return X_processed, encoder, scaler
-
-def apply_smote(X, y):
-    smote = SMOTE(random_state=42)
-    X_resampled, y_resampled = smote.fit_resample(X, y)
-    return X_resampled, y_resampled
+if __name__ == "__main__":
+    # Example usage
+    data_path = '../data/train/heart_failure_clinical_records_dataset.csv'
+    X, y = load_and_preprocess_data(data_path)
+    print("Data preprocessed and scaler saved.")
+    print("X shape:", X.shape)
+    print("y shape:", y.shape)
