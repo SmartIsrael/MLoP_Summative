@@ -136,7 +136,7 @@ predictions = predict(model, new_data)
 
   The model is deployed on Render. You can access it here: (https://mlop-summative.onrender.com/)
 ## Demo video
-Link - > [https://www.loom.com/share/eb587df444e04358bf969ce76e8bfda1?sid=cb5c4119-c84d-435a-9394-d0245657562b]
+Link - > (https://www.loom.com/share/536d5849cb57496599f7b38861109d53?sid=451d7d0b-0f46-40f6-95a2-5515c644ad8d)
 
 
 ## Load testing to simulate a large number of requests
