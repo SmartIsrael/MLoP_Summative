@@ -1,0 +1,10 @@
+pydantic
+uvicorn
+fastapi
+numpy
+pandas
+streamlit
+tensorflow
+scikit-learn
+imbalanced-learn
+plotly
