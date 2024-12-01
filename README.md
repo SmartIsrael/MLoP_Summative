@@ -41,7 +41,7 @@ Heart_Failure_Prediction/
 1. Ensure you have Python 3.7+ installed.
 2. Clone this repository:
    ```
-   git clone https://github.com/jefftrojan/heart-failure-prediction.git
+   git clone (https://github.com/SmartIsrael/MLoP_Summative.git)
    cd heart-failure-prediction
    ```
 3. Install required libraries:
@@ -134,8 +134,7 @@ predictions = predict(model, new_data)
 
 ## Deployment link
 
-  The model is deployed on Render. You can access it here: [https://heart-failure-prediction-ktzo.onrender.com/docs]
-
+  The model is deployed on Render. You can access it here: (https://mlop-summative.onrender.com/)
 ## Demo video
 Link - > [https://www.loom.com/share/eb587df444e04358bf969ce76e8bfda1?sid=cb5c4119-c84d-435a-9394-d0245657562b]
 
