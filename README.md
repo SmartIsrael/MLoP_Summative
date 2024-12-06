@@ -1,4 +1,5 @@
 # Heart Failure Prediction Project
+[My Live Demo] (https://mlopsummative-wvzzn6aesxxiqkaspzk5n4.streamlit.app/)
 
 ## Brief 
 This project aims to predict heart failure based on various clinical and demographic factors. The dataset used is from the MIMIC-III database, which is a large, publicly available database of de-identified datasets
